@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net7.0</TargetFramework>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <RootNamespace>TIKSN.hodgepodge</RootNamespace>
+        <AssemblyName>TIKSN.hodgepodge</AssemblyName>
+    </PropertyGroup>
+
+    <ItemGroup>
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Prime" Version="9.5.0"/>
+        <PackageReference Include="System.Management" Version="7.0.1"/>
+    </ItemGroup>
+
+</Project>
