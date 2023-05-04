@@ -9,9 +9,7 @@ let setRootProcessParentToNone (p: ProcessInfo) =
     match p.ParentProcessId with
     | Some pid ->
         if pid = p.ProcessId then
-            { ProcessId = p.ProcessId
-              ParentProcessId = None
-              Path = p.Path }
+            { p with ParentProcessId = None }
         else
             p
     | None -> p
