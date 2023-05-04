@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <TargetFramework>net7.0</TargetFramework>
@@ -14,7 +14,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Prime" Version="9.5.0"/>
+        <PackageReference Include="Prime" Version="9.6.0"/>
         <PackageReference Include="System.Management" Version="7.0.1"/>
     </ItemGroup>
 
