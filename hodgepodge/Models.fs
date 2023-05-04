@@ -1,7 +1,7 @@
 namespace TIKSN.hodgepodge
 
 type ProcessInfo =
-    { ProcessId: uint option
+    { ProcessId: uint
       ParentProcessId: uint option
       Path: string option }
 
