@@ -8,6 +8,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <Compile Include="Models.fs"/>
     </ItemGroup>
 
     <ItemGroup>
