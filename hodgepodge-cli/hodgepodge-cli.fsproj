@@ -15,4 +15,8 @@
         <ProjectReference Include="..\hodgepodge\hodgepodge.fsproj"/>
     </ItemGroup>
 
+    <ItemGroup>
+        <PackageReference Include="Dumpify" Version="0.5.2"/>
+    </ItemGroup>
+
 </Project>
