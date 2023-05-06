@@ -26,3 +26,14 @@ let listProcess () =
         { ProcessId = getManagementObjectPropertyRequiredValue<uint> managementObject "ProcessId"
           ParentProcessId = getManagementObjectPropertyValue<uint> managementObject "ParentProcessId"
           Path = getManagementObjectPropertyOptionalValue<string> managementObject "ExecutablePath" })
+
+let listServices () =
+    let serviceSearcher = new ManagementObjectSearcher("SELECT * FROM Win32_Service")
+    let serviceSearchResult = serviceSearcher.Get()
+
+    serviceSearchResult
+    |> Seq.cast<ManagementObject>
+    |> Seq.map (fun managementObject ->
+        { ProcessId = getManagementObjectPropertyValue<uint> managementObject "ProcessId"
+          Path = getManagementObjectPropertyOptionalValue<string> managementObject "PathName"
+          State = getManagementObjectPropertyOptionalValue<string> managementObject "State" })
