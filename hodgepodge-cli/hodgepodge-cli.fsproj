@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <OutputType>Exe</OutputType>
@@ -16,7 +16,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Dumpify" Version="0.5.2"/>
+        <PackageReference Include="Dumpify" Version="0.5.3"/>
     </ItemGroup>
 
 </Project>
