@@ -2,7 +2,8 @@
 
 let processes = Platform.listProcess ()
 let services = Platform.listServices ()
+let installedPrograms = Platform.listInstalledPrograms ()
 
-match services with
+match installedPrograms with
 | Ok v -> Dumpify.DumpExtensions.Dump(v) |> ignore
 | Error _ -> printfn "Failed to get process list"
