@@ -7,6 +7,8 @@ Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "hodgepodge", "hodgepodge\ho
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "hodgepodge-cli", "hodgepodge-cli\hodgepodge-cli.fsproj", "{7B245A43-994C-4E03-86C3-FDF35F64C41D}"
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "hodgepodge-tests", "hodgepodge-tests\hodgepodge-tests.fsproj", "{84618BD5-0939-4222-92F6-D51124188CBA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{7B245A43-994C-4E03-86C3-FDF35F64C41D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7B245A43-994C-4E03-86C3-FDF35F64C41D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7B245A43-994C-4E03-86C3-FDF35F64C41D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{84618BD5-0939-4222-92F6-D51124188CBA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84618BD5-0939-4222-92F6-D51124188CBA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84618BD5-0939-4222-92F6-D51124188CBA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84618BD5-0939-4222-92F6-D51124188CBA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
