@@ -16,7 +16,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Dumpify" Version="0.5.3"/>
+        <PackageReference Include="Dumpify" Version="0.5.4"/>
     </ItemGroup>
 
 </Project>
