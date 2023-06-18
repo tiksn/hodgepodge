@@ -9,17 +9,14 @@ let listProcess () =
     match Environment.OSVersion.Platform with
     | PlatformID.Win32NT -> Ok(Windows.listProcess ())
     | _ -> Error platformNotFoundError
-    |> Result.map (fun x -> x |> Seq.map CrossPlatform.setRootProcessParentToNone)
-    |> Result.map (fun x -> x |> Seq.toList)
+    |> Result.map (fun x -> x |> List.map CrossPlatform.setRootProcessParentToNone)
 
 let listServices () =
     match Environment.OSVersion.Platform with
     | PlatformID.Win32NT -> Ok(Windows.listServices ())
     | _ -> Error platformNotFoundError
-    |> Result.map (fun x -> x |> Seq.toList)
 
 let listInstalledPrograms () =
     match Environment.OSVersion.Platform with
     | PlatformID.Win32NT -> Ok(Windows.listInstalledPrograms ())
     | _ -> Error platformNotFoundError
-    |> Result.map (fun x -> x |> Seq.toList)

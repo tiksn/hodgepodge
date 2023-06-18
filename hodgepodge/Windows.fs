@@ -38,6 +38,7 @@ let listProcess () =
         { ProcessId = getManagementObjectPropertyRequiredValue<uint> managementObject "ProcessId"
           ParentProcessId = getManagementObjectPropertyValue<uint> managementObject "ParentProcessId"
           Path = getManagementObjectPropertyOptionalValue<string> managementObject "ExecutablePath" })
+    |> Seq.toList
 
 let listServices () =
     let serviceSearcher = new ManagementObjectSearcher("SELECT * FROM Win32_Service")
@@ -49,6 +50,7 @@ let listServices () =
         { ProcessId = getManagementObjectPropertyValue<uint> managementObject "ProcessId"
           Path = getManagementObjectPropertyOptionalValue<string> managementObject "PathName"
           State = getManagementObjectPropertyOptionalValue<string> managementObject "State" })
+    |> Seq.toList
 
 let getInstalledProgramForSubKey (key: RegistryKey) (subKeyName: string) =
     use subKey = key.OpenSubKey(subKeyName)
