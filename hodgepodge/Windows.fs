@@ -95,6 +95,4 @@ let listInstalledPrograms () =
         @ (listInstalledProgramsForKey RegistryHive.CurrentUser currentRegistryView uninstallRegistryKey)
         @ (listInstalledProgramsForKey RegistryHive.LocalMachine RegistryView.Registry64 wowUninstallRegistryKey)
 
-    installedPrograms
-    |> List.distinctBy (fun x -> (x.Name, x.Path))
-
+    installedPrograms |> List.distinctBy (fun x -> (x.Name, x.Path))
