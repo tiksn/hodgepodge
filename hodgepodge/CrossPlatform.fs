@@ -13,3 +13,6 @@ let setRootProcessParentToNone (p: ProcessInfo) =
         else
             p
     | None -> p
+
+let groupProcesses (pil: ProcessInfo list) =
+    pil |> List.map setRootProcessParentToNone
