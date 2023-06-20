@@ -3,6 +3,7 @@ module TIKSN.hodgepodge.Windows
 open System
 open System.Management
 open Microsoft.Win32
+open Prime
 open TIKSN.hodgepodge.CrossPlatform
 
 let getManagementObjectPropertyValue<'a> (managementObject: ManagementObject) (name: string) : 'a option =
@@ -56,6 +57,18 @@ let listServices () : ServiceInfo list =
     |> Seq.toList
 
 let getInstalledProgramForSubKey (key: RegistryKey) (subKeyName: string) : InstalledProgramInfo option =
+    let versionStringToEither (versionString: string) : Either<string, Version> =
+        let mutable version: Version = null
+
+        match Version.TryParse(versionString, &version) with
+        | true -> Right version
+        | false -> Left versionString
+
+    let versionOptionalStringToEither (versionString: string option) : Either<string, Version> option =
+        match versionString with
+        | Some v -> Some(versionStringToEither v)
+        | None -> None
+
     use subKey = key.OpenSubKey(subKeyName)
     let displayName = getRegistryKeyOptionalValue<string> subKey "DisplayName"
     let installLocation = getRegistryKeyOptionalValue<string> subKey "InstallLocation"
@@ -67,7 +80,7 @@ let getInstalledProgramForSubKey (key: RegistryKey) (subKeyName: string) : Insta
         Some
             { Name = displayName
               Path = installLocation
-              Version = displayVersion }
+              Version = (versionOptionalStringToEither displayVersion) }
 
 let listInstalledProgramsForKey
     (hive: RegistryHive)

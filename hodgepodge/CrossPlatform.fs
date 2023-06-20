@@ -96,13 +96,7 @@ let findProcessClusters (list: ProcessInfo list) : Either<ProcessInfo, ProcessTr
 
     match list with
     | [] -> []
-    | x :: xs ->
-        List.rev (
-            clusterHelper
-                []
-                (mapProcessInfoToCluster x)
-                xs
-        )
+    | x :: xs -> List.rev (clusterHelper [] (mapProcessInfoToCluster x) xs)
 
 let groupProcesses (pil: ProcessInfo list) : Either<ProcessInfo, ProcessTreeInfo> list =
     pil |> List.map setRootProcessParentToNone |> findProcessClusters
