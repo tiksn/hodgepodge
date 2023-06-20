@@ -8,15 +8,15 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Compile Include="Program.fs"/>
+        <Compile Include="Program.fs" />
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\hodgepodge\hodgepodge.fsproj"/>
+        <ProjectReference Include="..\hodgepodge\hodgepodge.fsproj" />
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Dumpify" Version="0.5.4"/>
+        <PackageReference Include="Spectre.Console" Version="0.47.0" />
     </ItemGroup>
 
 </Project>

@@ -1,9 +1,29 @@
-﻿open TIKSN.hodgepodge
+﻿open Spectre.Console
+open TIKSN.hodgepodge
 
-let processes = Platform.listProcess ()
-let services = Platform.listServices ()
-let installedPrograms = Platform.listInstalledPrograms ()
+let logError (result: Result<'a, (int * string)>) (action: string) : unit =
+    match result with
+    | Ok _ -> ()
+    | Error errorValue ->
+        let errorCode, errorMessage = errorValue
+        AnsiConsole.MarkupLineInterpolated($"[purple]{errorCode}[/]: [red]{errorMessage}[/] at [blue]{action}[/]")
 
-match installedPrograms with
-| Ok v -> Dumpify.DumpExtensions.Dump(v) |> ignore
-| Error _ -> printfn "Failed to get process list"
+    ()
+
+let search (ctx: StatusContext) : unit =
+    ctx.Status <- "Listing Processes..."
+    let processes = Platform.listProcess ()
+    logError processes "Listing Processes"
+
+    ctx.Status <- "Listing Services..."
+    let services = Platform.listServices ()
+    logError services "Listing Services"
+
+
+    ctx.Status <- "Listing Installed Programs..."
+    let installedPrograms = Platform.listInstalledPrograms ()
+    logError installedPrograms "Listing Installed Programs"
+
+    ()
+
+AnsiConsole.Status().Start("Searching...", search)
