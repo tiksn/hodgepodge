@@ -9,7 +9,7 @@ let listProcess () =
     match Environment.OSVersion.Platform with
     | PlatformID.Win32NT -> Ok(Windows.listProcess ())
     | _ -> Error platformNotFoundError
-    |> Result.map (fun x -> x |> List.map CrossPlatform.setRootProcessParentToNone)
+    |> Result.map CrossPlatform.groupProcesses
 
 let listServices () =
     match Environment.OSVersion.Platform with
