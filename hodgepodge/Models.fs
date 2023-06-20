@@ -1,5 +1,8 @@
 namespace TIKSN.hodgepodge
 
+open System
+open Prime
+
 type ProcessInfo =
     { ProcessId: uint
       ParentProcessId: uint option
@@ -19,4 +22,4 @@ type ServiceInfo =
 type InstalledProgramInfo =
     { Name: string option
       Path: string option
-      Version: string option }
+      Version: Either<string, Version> option }
