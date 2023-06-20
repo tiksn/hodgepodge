@@ -2,12 +2,12 @@ module TIKSN.hodgepodge.CrossPlatform
 
 open Prime
 
-let makeNullAsNone x =
+let makeNullAsNone (x: 'a option) : 'a option =
     match x with
     | Some null -> None
     | _ -> x
 
-let setRootProcessParentToNone (p: ProcessInfo) =
+let setRootProcessParentToNone (p: ProcessInfo) : ProcessInfo =
     match p.ParentProcessId with
     | Some pid ->
         if pid = p.ProcessId then
@@ -16,8 +16,8 @@ let setRootProcessParentToNone (p: ProcessInfo) =
             p
     | None -> p
 
-let findProcessClusters (list: ProcessInfo list) =
-    let rec shouldBeInCluster (item: ProcessInfo) (cluster: ProcessInfo list) =
+let findProcessClusters (list: ProcessInfo list) : Either<ProcessInfo, ProcessInfo list> list =
+    let rec shouldBeInCluster (item: ProcessInfo) (cluster: ProcessInfo list) : bool =
         match cluster with
         | [] -> false
         | x :: xs ->
@@ -31,7 +31,11 @@ let findProcessClusters (list: ProcessInfo list) =
             else
                 shouldBeInCluster item xs
 
-    let rec clusterHelper (acc: ProcessInfo list list) currentCluster rest =
+    let rec clusterHelper
+        (acc: ProcessInfo list list)
+        (currentCluster: ProcessInfo list)
+        (rest: ProcessInfo list)
+        : ProcessInfo list list =
         match rest with
         | [] -> currentCluster :: acc
         | x :: xs ->
@@ -40,7 +44,7 @@ let findProcessClusters (list: ProcessInfo list) =
             else
                 clusterHelper (currentCluster :: acc) [ x ] xs
 
-    let mapClusterToEitherList (cluster: ProcessInfo list) =
+    let mapClusterToEitherList (cluster: ProcessInfo list) : Either<ProcessInfo, ProcessInfo list> =
         match cluster with
         | [ x ] -> Left x
         | _ -> Right cluster
@@ -52,5 +56,5 @@ let findProcessClusters (list: ProcessInfo list) =
 
     clusters |> List.map mapClusterToEitherList
 
-let groupProcesses (pil: ProcessInfo list) =
+let groupProcesses (pil: ProcessInfo list) : Either<ProcessInfo, ProcessInfo list> list =
     pil |> List.map setRootProcessParentToNone |> findProcessClusters
