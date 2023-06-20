@@ -5,30 +5,33 @@ open System.Management
 open Microsoft.Win32
 open TIKSN.hodgepodge.CrossPlatform
 
-let getManagementObjectPropertyValue<'a> (managementObject: ManagementObject) (name: string) =
+let getManagementObjectPropertyValue<'a> (managementObject: ManagementObject) (name: string) : 'a option =
     try
         Some managementObject[name]
     with _ ->
         None
     |> Option.map (fun x -> x :?> 'a)
 
-let getManagementObjectPropertyRequiredValue<'a> (managementObject: ManagementObject) (name: string) =
+let getManagementObjectPropertyRequiredValue<'a> (managementObject: ManagementObject) (name: string) : 'a =
     getManagementObjectPropertyValue<'a> managementObject name |> Option.get
 
-let getManagementObjectPropertyOptionalValue<'a when 'a: null> (managementObject: ManagementObject) (name: string) =
+let getManagementObjectPropertyOptionalValue<'a when 'a: null>
+    (managementObject: ManagementObject)
+    (name: string)
+    : 'a option =
     getManagementObjectPropertyValue<'a> managementObject name |> makeNullAsNone
 
-let getRegistryKeyValue<'a> (subKey: RegistryKey) (name: string) =
+let getRegistryKeyValue<'a> (subKey: RegistryKey) (name: string) : 'a option =
     try
         Some(subKey.GetValue(name))
     with _ ->
         None
     |> Option.map (fun x -> x :?> 'a)
 
-let getRegistryKeyOptionalValue<'a when 'a: null> (subKey: RegistryKey) (name: string) =
+let getRegistryKeyOptionalValue<'a when 'a: null> (subKey: RegistryKey) (name: string) : 'a option =
     getRegistryKeyValue<'a> subKey name |> makeNullAsNone
 
-let listProcess () =
+let listProcess () : ProcessInfo list =
     let processSearcher = new ManagementObjectSearcher("SELECT * FROM Win32_Process")
     let processSearchResult = processSearcher.Get()
 
@@ -40,7 +43,7 @@ let listProcess () =
           Path = getManagementObjectPropertyOptionalValue<string> managementObject "ExecutablePath" })
     |> Seq.toList
 
-let listServices () =
+let listServices () : ServiceInfo list =
     let serviceSearcher = new ManagementObjectSearcher("SELECT * FROM Win32_Service")
     let serviceSearchResult = serviceSearcher.Get()
 
@@ -52,7 +55,7 @@ let listServices () =
           State = getManagementObjectPropertyOptionalValue<string> managementObject "State" })
     |> Seq.toList
 
-let getInstalledProgramForSubKey (key: RegistryKey) (subKeyName: string) =
+let getInstalledProgramForSubKey (key: RegistryKey) (subKeyName: string) : InstalledProgramInfo option =
     use subKey = key.OpenSubKey(subKeyName)
     let displayName = getRegistryKeyOptionalValue<string> subKey "DisplayName"
     let installLocation = getRegistryKeyOptionalValue<string> subKey "InstallLocation"
@@ -66,7 +69,11 @@ let getInstalledProgramForSubKey (key: RegistryKey) (subKeyName: string) =
               Path = installLocation
               Version = displayVersion }
 
-let listInstalledProgramsForKey (hive: RegistryHive) (view: RegistryView) (registryKey: string) =
+let listInstalledProgramsForKey
+    (hive: RegistryHive)
+    (view: RegistryView)
+    (registryKey: string)
+    : InstalledProgramInfo list =
     use baseKey = RegistryKey.OpenBaseKey(hive, view)
     use key = baseKey.OpenSubKey(registryKey)
 
@@ -78,7 +85,7 @@ let listInstalledProgramsForKey (hive: RegistryHive) (view: RegistryView) (regis
     |> Seq.toList
 
 
-let listInstalledPrograms () =
+let listInstalledPrograms () : InstalledProgramInfo list =
     let uninstallRegistryKey = @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall"
 
     let wowUninstallRegistryKey =
