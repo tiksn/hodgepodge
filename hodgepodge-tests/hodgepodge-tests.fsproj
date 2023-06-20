@@ -13,7 +13,7 @@
 
   <ItemGroup>
     <PackageReference Include="Expecto" Version="10.0.0" />
-    <PackageReference Include="YoloDev.Expecto.TestSdk" Version="0.13.3" />
+    <PackageReference Include="YoloDev.Expecto.TestSdk" Version="0.14.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.6.2" />
   </ItemGroup>
 
