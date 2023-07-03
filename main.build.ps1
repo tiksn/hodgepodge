@@ -27,7 +27,7 @@ task Build Format, {
 
 task Format Clean, {
     Exec { dotnet tool restore }
-    Exec { dotnet fantomas . --recurse }
+    Exec { dotnet fantomas --recurse . }
 }
 task Clean Init, {
     $solution = Resolve-Path -Path $data.Solution
