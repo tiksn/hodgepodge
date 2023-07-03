@@ -1,0 +1,10 @@
+{
+    "recommendations": [
+        "editorconfig.editorconfig",
+        "ms-dotnettools.vscode-dotnet-pack",
+        "streetsidesoftware.code-spell-checker",
+        "ionide.ionide-fsharp",
+        "ms-vsliveshare.vsliveshare-pack",
+        "ms-vscode.powershell"
+    ]
+}
