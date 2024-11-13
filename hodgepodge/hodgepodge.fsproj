@@ -16,7 +16,7 @@
 
     <ItemGroup>
         <PackageReference Include="Prime" Version="9.32.0"/>
-        <PackageReference Include="System.Management" Version="8.0.0"/>
+        <PackageReference Include="System.Management" Version="9.0.0"/>
     </ItemGroup>
 
 </Project>
