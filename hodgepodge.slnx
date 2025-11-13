@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="hodgepodge-cli/hodgepodge-cli.fsproj" />
+  <Project Path="hodgepodge-tests/hodgepodge-tests.fsproj" />
+  <Project Path="hodgepodge/hodgepodge.fsproj" />
+</Solution>
